@@ -1,0 +1,5 @@
+*build*/
+QCustomPlot/
+*qcustomplot.h
+*qcustomplot.cpp
+*testData.adc
