@@ -212,6 +212,11 @@ void MainWindow::on_pb_start_clicked()
         return;
     }
 
+    if(chart->series().isEmpty() == false){
+        series->clear();
+        chart->removeSeries(series);
+    }
+
     ui->chB_maxSucess->setChecked(false);
     ui->chB_procFileSucces->setChecked(false);
     ui->chB_readSucces->setChecked(false);
@@ -236,11 +241,11 @@ void MainWindow::on_pb_start_clicked()
                                                 maxs = FindMax(res);
                                                 mins = FindMin(res);
                                                 DisplayResult(mins, maxs);
-                                                double time = 0.001;
+                                                double time = 1/FD;
                                                 for (int i = 1; i < FD; ++i)
                                                 {
                                                     series->append(time, res[i]);
-                                                    time += 0.001;
+                                                    time += 1/FD;
                                                 }
                                                 emit sig_ready();
                                              };
@@ -249,12 +254,11 @@ void MainWindow::on_pb_start_clicked()
                                .then(process)
                                .then(findMax);
 
-
-
 }
 
 void MainWindow::Rcv_ready_sig()
 {
+
     chart->legend()->hide();
     chart->addSeries(series);
     chart->createDefaultAxes();
