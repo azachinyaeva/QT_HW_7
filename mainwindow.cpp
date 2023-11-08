@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     chart = new QChart();
     chart->legend()->setVisible(false);
     chartView = new QChartView(chart);
-    series = new QLineSeries();
+    series = new QLineSeries(this);
     chartView->resize(500,500);
 
     QPen pen(QRgb(0x6AA84F));
@@ -26,7 +26,6 @@ MainWindow::~MainWindow()
     delete ui;
     delete chart;
     delete chartView;
-    delete series;
 }
 
 
